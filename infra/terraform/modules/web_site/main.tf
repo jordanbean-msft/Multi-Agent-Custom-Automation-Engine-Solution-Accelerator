@@ -5,12 +5,13 @@ module "naming" {
 }
 
 module "avm-res-web-site" {
-  source              = "Azure/avm-res-web-site/azurerm"
-  version             = "0.17.2"
-  name                = module.naming.application_insights.name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  tags                = var.tags
+  source                      = "Azure/avm-res-web-site/azurerm"
+  version                     = "0.17.2"
+  name                        = module.naming.application_insights.name
+  location                    = var.location
+  resource_group_name         = var.resource_group_name
+  tags                        = var.tags
+  enable_application_insights = true
   application_insights = {
     workspace_resource_id = var.log_analytics_workspace_resource_id
   }
@@ -31,5 +32,8 @@ module "avm-res-web-site" {
     default = {
       subnet_resource_id = var.private_endpoint_subnet_resource_id
     }
+  }
+  managed_identities = {
+    user_assigned_resource_ids = [var.user_assigned_identity_resource_id]
   }
 }

@@ -66,11 +66,11 @@ locals {
   ]
   web_site_app_settings = {
     SCM_DO_BUILD_DURING_DEPLOYMENT      = "true"
-    DOCKER_REGISTRY_SERVER_URL          = module.container_registry.container_registry_login_server
     WEBSITES_PORT                       = "3000"
     WEBSITES_CONTAINER_START_TIME_LIMIT = "1800" // 30 minutes, adjust as needed
     BACKEND_API_URL                     = module.container_apps_backend.container_apps_fqdn_url
     AUTH_ENABLED                        = "false"
+    WEBSITE_PULL_IMAGE_OVER_VNET        = "true"
   }
 }
 
@@ -304,9 +304,17 @@ module "web_site" {
   kind                                = "webapp"
   app_settings                        = local.web_site_app_settings
   site_config = {
-    linux_fx_version = "DOCKER|${var.web_site.image_name}"
+    linux_fx_version                              = "DOCKER|${var.web_site.image_name}"
+    container_registry_managed_identity_client_id = module.managed_identity.user_assigned_identity_client_id
+    container_registry_use_managed_identity       = true
+    vnet_route_all_enabled                        = true
+    # application_stack = {
+    #   docker_image_name   = var.web_site.image_name
+    #   docker_registry_url = module.container_registry.container_registry_login_server
+    # }
   }
   public_network_access_enabled       = var.public_network_access_enabled
   private_endpoint_subnet_resource_id = module.virtual_network.private_endpoint_subnet_resource_id
   app_service_subnet_resource_id      = module.virtual_network.app_service_subnet_resource_id
+  user_assigned_identity_resource_id  = module.managed_identity.user_assigned_identity_id
 }

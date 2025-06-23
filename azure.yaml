@@ -2,10 +2,24 @@
 name: multi-agent-custom-automation-engine-solution-accelerator
 metadata:
   template: multi-agent-custom-automation-engine-solution-accelerator@1.0
+services:
+  backend:
+    project: ./src/backend
+    host: containerapp
+    language: python
+    docker:
+      remoteBuild: true
 infra:
   provider: terraform
   path: ./infra/terraform
 # hooks:
+# preprovision:
+#   posix:
+#     shell: sh
+#     run: >
+#       chmod u+r+x ./infra/terraform/scripts/build.sh
+#     interactive: false
+#     continueOnError: false
 # preprovision:
 #   posix:
 #     shell: sh

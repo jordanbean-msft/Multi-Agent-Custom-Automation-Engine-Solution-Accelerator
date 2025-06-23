@@ -47,7 +47,14 @@ variable "app_settings" {
 variable "site_config" {
   description = "Configuration settings for the Web App"
   type = object({
-    linux_fx_version = optional(string)
+    linux_fx_version                              = string
+    container_registry_managed_identity_client_id = string
+    container_registry_use_managed_identity       = bool
+    vnet_route_all_enabled                        = bool
+    # application_stack = object({
+    #   docker_image_name   = string
+    #   docker_registry_url = string
+    # })
   })
 }
 
@@ -63,5 +70,10 @@ variable "private_endpoint_subnet_resource_id" {
 
 variable "app_service_subnet_resource_id" {
   description = "The resource ID of the subnet for the App Service"
+  type        = string
+}
+
+variable "user_assigned_identity_resource_id" {
+  description = "The managed identity ID for the Web App"
   type        = string
 }
