@@ -7,7 +7,7 @@ module "naming" {
 module "avm-res-search-searchservice" {
   source              = "Azure/avm-res-search-searchservice/azurerm"
   version             = "0.1.5"
-  name                = module.naming.user_assigned_identity.name
+  name                = module.naming.search_service.name
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
@@ -24,11 +24,19 @@ module "avm-res-search-searchservice" {
   }
   sku = "standard"
   role_assignments = {
-    user_assigned_managed_identity = {
+    search_index_data_contributor = {
       principal_id               = var.user_assigned_identity_principal_id
       principal_type             = "ServicePrincipal"
       role_definition_id_or_name = "Search Index Data Contributor"
+    },
+    search_service_contributor = {
+      principal_id               = var.user_assigned_identity_principal_id
+      principal_type             = "ServicePrincipal"
+      role_definition_id_or_name = "Search Service Contributor"
     }
   }
   local_authentication_enabled = false
+  hosting_mode                 = "default"
+  partition_count              = 1
+  replica_count                = 1
 }

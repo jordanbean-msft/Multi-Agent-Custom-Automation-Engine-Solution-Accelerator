@@ -7,7 +7,7 @@ module "naming" {
 module "avm-res-web-site" {
   source                      = "Azure/avm-res-web-site/azurerm"
   version                     = "0.17.2"
-  name                        = module.naming.application_insights.name
+  name                        = module.naming.app_service.name
   location                    = var.location
   resource_group_name         = var.resource_group_name
   tags                        = var.tags
@@ -33,7 +33,10 @@ module "avm-res-web-site" {
       subnet_resource_id = var.private_endpoint_subnet_resource_id
     }
   }
+  private_endpoints_manage_dns_zone_group = false
   managed_identities = {
     user_assigned_resource_ids = [var.user_assigned_identity_resource_id]
   }
+  ftp_publish_basic_authentication_enabled       = false
+  webdeploy_publish_basic_authentication_enabled = false
 }

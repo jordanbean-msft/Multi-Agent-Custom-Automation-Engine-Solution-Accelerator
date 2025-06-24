@@ -41,4 +41,10 @@ module "avm-res-documentdb-databaseaccount" {
     }
   ]
   local_authentication_disabled = true
+  consistency_policy = {
+    consistency_level = "Session"
+  }
+  free_tier_enabled                = false
+  automatic_failover_enabled       = false
+  multiple_write_locations_enabled = false
 }

@@ -44,6 +44,11 @@ variable "user_assigned_identity_id" {
   type        = string
 }
 
+variable "user_assigned_identity_client_id" {
+  description = "The client ID of the user-assigned identity for role assignments"
+  type        = string
+}
+
 variable "storage_account_resource_id" {
   description = "The resource ID of the storage account for AI Foundry"
   type        = string
@@ -76,5 +81,35 @@ variable "cosmos_db_account_document_endpoint" {
 
 variable "private_endpoint_subnet_resource_id" {
   description = "The resource ID of the private endpoint subnet for AI Foundry"
+  type        = string
+}
+
+variable "model_sku_name" {
+  description = "The SKU name for the AI Foundry model"
+  type        = string
+}
+
+variable "model_sku_capacity" {
+  description = "The SKU capacity for the AI Foundry model"
+  type        = number
+}
+
+variable "model_format" {
+  description = "The format of the AI Foundry model"
+  type        = string
+}
+
+variable "model_name" {
+  description = "The name of the AI Foundry model"
+  type        = string
+}
+
+variable "model_version" {
+  description = "The version of the AI Foundry model"
+  type        = string
+}
+
+variable "sku_name" {
+  description = "The SKU name for the AI Foundry account"
   type        = string
 }

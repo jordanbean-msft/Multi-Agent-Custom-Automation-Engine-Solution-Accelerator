@@ -27,7 +27,6 @@ resource "azapi_update_resource" "add_subnet_delegation_for_ai_foundry_agent_sub
           name = "Microsoft.App/environments"
           properties = {
             serviceName = "Microsoft.App/environments"
-            actions     = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
           }
         }
       ]
@@ -46,7 +45,6 @@ resource "azapi_update_resource" "add_subnet_delegation_for_app_service_subnet" 
           name = "Microsoft.Web/serverFarms"
           properties = {
             serviceName = "Microsoft.Web/serverFarms"
-            actions     = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
           }
         }
       ]

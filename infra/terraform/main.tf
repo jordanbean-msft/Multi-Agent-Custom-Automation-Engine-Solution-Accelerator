@@ -273,6 +273,13 @@ module "ai_foundry" {
   ai_search_name                        = module.ai_search.ai_search_name
   cosmos_db_account_document_endpoint   = module.cosmos_db.cosmos_db_account_document_endpoint
   ai_foundry_agent_subnet_resource_id   = module.virtual_network.ai_foundry_agent_subnet_resource_id
+  model_sku_name                        = var.ai_foundry.model.sku_name
+  model_sku_capacity                    = var.ai_foundry.model.sku_capacity
+  model_format                          = var.ai_foundry.model.format
+  model_name                            = var.ai_foundry.model.name
+  model_version                         = var.ai_foundry.model.version
+  sku_name                              = var.ai_foundry.sku_name
+  user_assigned_identity_client_id      = module.managed_identity.user_assigned_identity_client_id
 }
 
 # -------------------------------------------------------------------------------------------------------

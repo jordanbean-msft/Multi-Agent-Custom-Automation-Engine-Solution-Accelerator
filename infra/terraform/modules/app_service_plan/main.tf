@@ -7,7 +7,7 @@ module "naming" {
 module "avm-res-web-serverfarm" {
   source                 = "Azure/avm-res-web-serverfarm/azurerm"
   version                = "0.7.0"
-  name                   = module.naming.application_insights.name
+  name                   = module.naming.app_service_plan.name
   location               = var.location
   resource_group_name    = var.resource_group_name
   tags                   = var.tags

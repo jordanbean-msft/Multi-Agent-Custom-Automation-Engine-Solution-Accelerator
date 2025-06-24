@@ -79,6 +79,14 @@ variable "network" {
 variable "ai_foundry" {
   description = "Configuration for the AI Foundry resources"
   type = object({
+    sku_name = string,
+    model = object({
+      sku_name     = string,
+      sku_capacity = number,
+      format       = string,
+      name         = string,
+      version      = string
+    })
   })
 }
 
